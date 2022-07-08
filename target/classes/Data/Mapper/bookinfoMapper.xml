@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Data.Mapper.bookinfoMapper">
+
+    <select id="selectByName" resultType="Data.pojo.bookInfo">
+        select * from bookinfo where name = #{name}
+    </select>
+
+    <select id="selectByAuthor" resultType="Data.pojo.bookInfo">
+        select * from bookinfo where author = #{author}
+    </select>
+
+    <select id="selectByPress" resultType="Data.pojo.bookInfo">
+        select * from bookinfo where press = #{press}
+    </select>
+
+    <insert id="bookInfoAdd" >
+        insert into bookinfo (id, name, author, press, date, number, price)
+        values (#{id}, #{name}, #{author}, #{press}, #{date}, #{number}, #{price})
+    </insert>
+
+    <select id="selectByNameUp" resultType="Data.pojo.bookInfo">
+        select * from bookinfo order by name
+    </select>
+    <select id="selectByIdUp" resultType="Data.pojo.bookInfo">
+        select * from bookinfo order by id
+    </select>
+
+    <delete id="bookInfoDeleteByName">
+        delete from bookinfo where name = #{name}
+    </delete>
+
+    <delete id="bookInfoDeleteById">
+        delete from bookinfo where id = #{id}
+    </delete>
+
+    <select id="bookNumberQuery" resultType="java.lang.Integer">
+        select number from bookinfo where id = #{id}
+    </select>
+
+    <select id="getBname" resultType="java.lang.String">
+        select name from bookinfo where id = #{id}
+    </select>
+
+    <update id="bookNumberDec">
+        update bookinfo set number = number - #{bookNum} where id = #{id}
+    </update>
+
+    <update id="bookNumberInc">
+        update bookinfo set number = number + #{bookNum} where id = #{id}
+    </update>
+
+    <update id="EditById">
+        update bookinfo set name = #{name}, author = #{author}, press = #{press}, date = #{date}, number = #{number}, price = #{price}
+        where id = #{id}
+    </update>
+
+    <update id="EditByName">
+        update bookinfo set id = #{id}, author = #{author}, press = #{press}, date = #{date}, number = #{number}, price = #{price}
+        where name = #{name}
+    </update>
+
+</mapper>

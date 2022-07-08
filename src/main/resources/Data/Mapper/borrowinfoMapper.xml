@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Data.Mapper.borrowinfoMapper">
+    <!--    <resultMap id="borrowResultMap" type="Data.pojo.borrowInfo">-->
+<!--        <result column="borrowinfo.num" property="num" />-->
+<!--        <result column="readerinfo.name" property="stuName" />-->
+<!--        <result column="borrowinfo.id" property="id" />-->
+<!--        <result column="bookinfo.name" property="name" />-->
+<!--    </resultMap>-->
+
+<!--    <select id="selectByNum" resultType="Data.pojo.borrowInfo" resultMap="borrowResultMap">-->
+<!--        select borrowinfo.num, readerinfo.name, borrowinfo.id, bookinfo.name, borrowDate, deadline, returnDate-->
+<!--        from bookinfo, readerinfo, borrowinfo-->
+<!--        where bookinfo.id = borrowinfo.id and borrowinfo.num = #{num} and readerinfo.num = borrowinfo.num-->
+<!--    </select>-->
+
+    <select id="selectByName" resultType="Data.pojo.borrowInfo">
+        select * from borrowinfo where bname = #{name}
+    </select>
+
+    <select id="selectByCollege" resultType="Data.pojo.borrowInfo">
+        select borrowinfo.num, sname, id, bname, borrowDate, deadline, returnDate from borrowinfo, readerinfo
+        where college = #{college} and borrowinfo.num = readerinfo.num
+    </select>
+
+    <select id="selectByNum" resultType="Data.pojo.borrowInfo">
+        select * from borrowinfo where num = #{num}
+    </select>
+
+    <insert id="borrowInfoAdd">
+        insert into borrowinfo (num, sname, id, bname, borrowDate, deadline)
+        values (#{num}, #{sname}, #{id}, #{bname}, now(), adddate(now(),#{deadline}))
+    </insert>
+
+    <update id="returnInfoEdit">
+        update borrowinfo set returnDate = now()
+    </update>
+
+</mapper>

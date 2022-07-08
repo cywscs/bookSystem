@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Data.Mapper.readerinfoMapper">
+
+    <insert id="readerInfoAdd">
+        insert into readerinfo (num, name, college, major_class)
+        values (#{num},#{name},#{college},#{major_class})
+    </insert>
+
+    <select id="selectByNum" resultType="Data.pojo.readerInfo">
+        select * from readerinfo where num = #{num}
+    </select>
+
+    <select id="selectByName" resultType="Data.pojo.readerInfo">
+        select * from readerinfo where name = #{name}
+    </select>
+
+    <select id="selectByMajor_class" resultType="Data.pojo.readerInfo">
+        select * from readerinfo where major_class = #{major_class}
+    </select>
+
+    <select id="selectByNumUp" resultType="Data.pojo.readerInfo">
+        select * from readerinfo order by num
+    </select>
+
+    <select id="selectByCollegeUp" resultType="Data.pojo.readerInfo">
+        select * from readerinfo order by college
+    </select>
+
+    <select id="getSname" resultType="java.lang.String">
+        select name from readerinfo where num = #{num}
+    </select>
+
+    <delete id="readerInfoDelete">
+        delete from readerinfo where num = #{num} and name = #{name}
+    </delete>
+
+    <update id="readerInfoEdit">
+        update readerinfo set college = #{college}, major_class = #{major_class}
+        where num = #{num} and name = #{name}
+    </update>
+</mapper>
